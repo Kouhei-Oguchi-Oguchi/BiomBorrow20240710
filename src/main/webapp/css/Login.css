@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+body {
+	font-family: 'Arial', sans-serif;
+	background-color: #F7F8FA;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+header h1{
+	background-color: #ff6c84;
+	padding: 20px;
+	border-radius: 50px;	
+}
+

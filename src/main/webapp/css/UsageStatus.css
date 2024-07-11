@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+
+h1{
+	font-family: 'Arial', sans-serif;
+}
+.main-container{
+	width:90%;
+	margin:0 auto;
+}
+table{
+	text-align: center;
+	border-collapse: separate;
+	font-family: 'Arial', sans-serif;
+	table-layout:fixed;
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+tr:nth-child(odd){
+	background-color: #F7F8FA;
+}
+
+th,td{
+	border:solid 1px;
+	padding: 5px 10px;
+	text-align: center;
+}
+th {
+	padding: 15px;
+}
+#borrowDate{
+	background-color: #c83e36; 
+}
+.graph-container {
+  width: 50%;
+}
+
+#myPieChart {
+  width: 100%;
+
+}
+
+
+
+
+
+@media(max-width: 2000px){
+	
+
+.main-container{
+	width:90%;
+	margin:0 auto;
+}
+ h1{
+    font-family: 'Arial', sans-serif;
+    width:100%;
+}
+
+table{
+	border-collapse: separate;
+	font-family: 'Arial', sans-serif;
+	table-layout:fixed;
+    text-align: center;
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+
+}
+tr:nth-child(odd){
+	background-color: #F7F8FA;
+}
+
+th,td{
+	border:solid 1px;
+	padding: 5px 10px;
+	text-align: center;
+}
+th {
+	padding: 15px;
+}
+#borrowDate{
+	background-color: #c83e36; 
+}
+.graph-container {
+  width: 50%;
+}
+
+#myPieChart {
+  width: 100%;
+}
+
+
+}

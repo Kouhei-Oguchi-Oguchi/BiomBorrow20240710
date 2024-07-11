@@ -1,0 +1,78 @@
+@charset "UTF-8";
+html {
+	font-size: 100%;
+}
+body{
+	font-family: 'Arial', sans-serif;
+}
+
+a{
+	text-decoration: none;
+}
+.main-nav{
+	display: flex;
+	font-size: 1.25rem;
+	margin-top: 34px;
+	list-style: none;
+	justify-content: space-between;
+}
+.main-nav li{
+	margin-left: 36px;
+}
+.main-nav a{
+	color: #432;
+}
+.main-nav a:hover{
+	color: 0bd;
+}
+
+.page-header{
+	display: flex;
+	justify-content: space-between;
+}
+.wrapper{
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 0 4%;
+}
+.home-content p{
+  font-size: 0.9rem;
+  margin: 30px 0px;
+  line-height: 1.0;
+}
+.underline{
+	display: block;
+	border-bottom: 1px solid;
+	padding-bottom: 20px;
+	margin-bottom: 20px
+}
+input[type="text"],input[type="datetime-local"],input[type="submit"] {
+   border: 1px solid #ccc;
+   padding: 10px;
+   margin: 20px;
+}
+.form-style{
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ grid-gap: 20px;
+ grid-template-areas: 
+      "label1 input1 label2 input2"
+      "label3 input3 label4 input4"
+      "label5 input5 button button";
+ max-width: 600px;
+ margin: 0 auto;
+}
+.form-style label{
+	grid-area: label;
+}
+.form-style input{
+	grid-area: input;
+}
+.form-style .button{
+	grid-area:button;
+}
+
+.button:hover {
+    background: #0090aa;
+}
+

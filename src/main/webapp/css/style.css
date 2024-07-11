@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+body {
+	font-family: 'Arial', sans-serif;
+	background-color: #F7F8FA;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.dark-theme{
+	background: #000;
+	color: #ddd;
+}
+#btn{
+	background: #0bd;
+	padding :1rem;
+	margin-bottom: 2rem;
+	font-size:1rem;
+	color: #fff;
+	border-radius: 8px;
+	border: 0;
+	cursor: pointer;
+}
+
+@media (max-width: 1080px){
+h1 {
+	color: #2F2E2E; 
+	margin: 20px;
+}
+
+a {
+	color: rgba(250, 251, 255, 0.51); 
+	text-decoration: none;
+	font-size: 50px;
+	font-weight: bold;
+	transition: color 0.3s;
+}
+
+a:hover {
+	color: #2C44C8; /* クリック時の色を少し暗く */
+}
+.container{
+  display: grid;
+    grid-template-columns: 200px 200px 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "borrow return"
+        "search enroll";
+    gap: 30px;
+ }
+ .item{
+	background: #f0f0f0;
+	padding: 70px;
+	border-radius: 5px;
+}
+.borrow-item{
+	grid-area: borrow;
+	background-color: #00a5dd;
+	list-style-type: none;
+}
+.return-item{
+    grid-area: return;
+    background-color: #ff006f;
+    list-style-type: none;
+}
+.search-item{
+	grid-area: search;
+    background-color: #b50099;
+    list-style-type: none;
+}
+.enroll-item{
+	grid-area: enroll;
+    background-color: #00a096;
+    list-style-type: none;
+}
+}
+@media (max-width: 2560px){
+h1 {
+	color: #2F2E2E; 
+	margin: 20px;
+}
+
+a {
+	color: rgba(250, 251, 255, 0.51); 
+	text-decoration: none;
+	font-size: 50px;
+	font-weight: bold;
+	transition: color 0.3s;
+}
+
+a:hover {
+	color: #2C44C8; /* クリック時の色を少し暗く */
+}
+.container{
+  display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "borrow return"
+        "search enroll";
+    gap: 30px;
+ }
+ .item{
+	background: #f0f0f0;
+	padding: 70px;
+	border-radius: 5px;
+}
+.borrow-item{
+	grid-area: borrow;
+	background-color: #00a5dd;
+	list-style-type: none;
+}
+.return-item{
+    grid-area: return;
+    background-color: #ff006f;
+    list-style-type: none;
+}
+.search-item{
+	grid-area: search;
+    background-color: #b50099;
+    list-style-type: none;
+}
+.enroll-item{
+	grid-area: enroll;
+    background-color: #00a096;
+    list-style-type: none;
+}
+}
