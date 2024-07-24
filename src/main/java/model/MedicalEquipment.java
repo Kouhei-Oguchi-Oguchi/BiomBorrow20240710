@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public class MedicalEquipment implements Serializable {
+public class MedicalEquipment implements Serializable, Cloneable {
 	private int medicalEquipmen;
 	private String modelNumber;
 	private String serialNumber;
@@ -278,5 +278,24 @@ public class MedicalEquipment implements Serializable {
 				", place='" + place + '\'' +
 				", deviceName" + deviceName +
 				'}';
+	}
+	public MedicalEquipment clone() {
+		try {
+			MedicalEquipment result = (MedicalEquipment) super.clone();
+			result.medicalEquipmen = this.medicalEquipmen;
+			System.out.println(medicalEquipmen);
+			result.modelNumber = this.modelNumber;
+			result.serialNumber = this.serialNumber;
+			result.manufacturer = this.manufacturer;
+			result.introducedDate = this.introducedDate;
+			result.borrowDate = this.borrowDate;
+			result.returnDate = this.returnDate;
+			result.place = this.place;
+		    result.returnID = this.returnID;
+			result.deviceName = this.deviceName;
+			return result;
+		}catch (CloneNotSupportedException e) {
+			throw new RuntimeException("クローンがサポートされていません", e);		}
+		
 	}
 }

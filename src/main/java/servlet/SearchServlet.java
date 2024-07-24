@@ -36,8 +36,14 @@ public class SearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String formType = request.getParameter("formType");
 		if("medicalEquipmentForm".equals(formType)) {
-			String medicalEquimentValue = request.getParameter("medicalEquipment");
-			int meNO = Integer.parseInt(medicalEquimentValue);
+			String medicalEquipmentValue = request.getParameter("medicalEquipment");
+			if(medicalEquipmentValue == null || medicalEquipmentValue.isEmpty()){
+				String errorMessage = "4桁番号を入力してください";
+				request.setAttribute("errorMessage", errorMessage);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ErrorMessage.jsp");
+				dispatcher.forward(request, response);
+			}
+			int meNO = Integer.parseInt(medicalEquipmentValue);
 			BorrowReturnLogic bo = new BorrowReturnLogic();
 			MedicalEquipmentResult medicalEquipmentResultValue = bo.getMedicalEquipmentByMeNo(meNO);
 			String imageFileName;
@@ -65,6 +71,12 @@ public class SearchServlet extends HttpServlet {
 			}
 		}else if("itemNameForm".equals(formType)) {
 			String itemName = request.getParameter("itemName");
+			if(itemName == null || itemName.isEmpty()){
+				String errorMessage = "機器が選択されていません";
+				request.setAttribute("errorMessage", errorMessage);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ErrorMessage.jsp");
+				dispatcher.forward(request, response);
+			}
 			BorrowReturnLogic bo = new BorrowReturnLogic();
 			MedicalEquipmentResult equipmentItems = bo.getFindByItemName(itemName);
 			if(equipmentItems.isEquipmentsSuccess()) {

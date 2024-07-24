@@ -2,7 +2,7 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class BorrowDate implements Serializable{
+public class BorrowDate implements Serializable, Cloneable{
 	private static LocalDateTime borrowdays;
 	public BorrowDate() {}
 	public BorrowDate(LocalDateTime borrowdays) {
@@ -14,5 +14,13 @@ public class BorrowDate implements Serializable{
 	public void setBorrowdays(LocalDateTime borrow_days) {
 		this.borrowdays = borrow_days;
 	}
+	public BorrowDate clone() {
+		try {
+			BorrowDate result = (BorrowDate ) super.clone();
+			result.borrowdays = this.borrowdays;
+			return result;
+		}catch (CloneNotSupportedException e) {
+			throw new RuntimeException("クローンがサポートされていません", e);
+		}
+	}
 }
-

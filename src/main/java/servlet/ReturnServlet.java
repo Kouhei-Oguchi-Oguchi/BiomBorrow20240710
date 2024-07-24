@@ -43,13 +43,21 @@ public class ReturnServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String datetimeValue = request.getParameter("Return-time");
-		String medicalEquimentValue = request.getParameter("medicalEquiment");
+		String medicalEquipmentValue = request.getParameter("medicalEquiment");
+		if(datetimeValue == null || datetimeValue.isEmpty() ||
+				medicalEquipmentValue == null || medicalEquipmentValue.isEmpty() ){
+			String errorMessage = "貸出日、4桁番号、部署のいずれかが未入力です";
+			request.setAttribute("errorMessage", errorMessage);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ErrorMessage.jsp");
+			dispatcher.forward(request, response);
+		}
 			DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 			LocalDateTime Returndays = LocalDateTime.parse(datetimeValue, fmt);
 			ReturnDate returndays = new ReturnDate(Returndays);
 			returndays.setReturndays(Returndays);
-			int meNO = Integer.parseInt(medicalEquimentValue);
+			int meNO = Integer.parseInt(medicalEquipmentValue);
 			MedicalEquipment medicalEquipmen = new MedicalEquipment(meNO);
+			try {
 			BorrowReturnLogic Bo = new BorrowReturnLogic();
 			MedicalEquipmentResult resultReturn = Bo.ReturnExecute(meNO,Returndays);
 			if(resultReturn.isSuccess()) {
@@ -64,5 +72,12 @@ public class ReturnServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ErrorMessage.jsp");
 			dispatcher.forward(request, response);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			String errorMessage = "システムエラー";
+			request.setAttribute("errorMessage", errorMessage);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ErrorMessage.jsp");
+			dispatcher.forward(request, response);	
+		}
 	}
 }

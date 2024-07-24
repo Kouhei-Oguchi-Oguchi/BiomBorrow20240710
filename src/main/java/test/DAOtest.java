@@ -14,7 +14,7 @@ import model.Place;
 import model.ReturnDate;
 public class DAOtest {
 	public static void main (String[] args) {
-		//testBorrowCreate();
+		testBorrowCreate();
 		//testReturnDateCreate();
 		//testBorrowReturnDateCreateNG();
 		//testBorrowReturnDateCreateDuplicate();

@@ -18,7 +18,7 @@
 		<lavel for='medicalEquipment'>4桁番号</lavel>
 		<input type='text' name='medicalEquipment' pattern='[1-9][0-9]{3}'>
 		<input type='hidden' name='formType' value='medicalEquipmentForm'>
-		<button type='submit'>送信</button>
+		<button type='submit'>検索</button>
 	</form>
 	<h1>習得</h1>
 	<form action = 'SearchServlet' method='post'>
@@ -26,7 +26,7 @@
 	<option value ='Infusion Pump' >輸液ポンプ</option>
 	</select>
 	<input type ='hidden' name ='formType' value = 'itemNameForm'>
-	<button type = 'submit'>送信</button>
+	<button type = 'submit'>検索</button>
 	</form>
 	<nav>
 		<button id="menu-open" class="btn-menu">

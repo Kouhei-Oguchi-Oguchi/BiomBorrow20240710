@@ -7,7 +7,7 @@ import model.Login;
 import model.MedicalEquipmentResult;
 public class BorrowRerutnLogicTset {
 	public static void main(String[] args) {
-		//testBorrowExecuteOK();
+		testBorrowExecuteOK();
 		//testBorrowExecuteDuplicate();
 		//testBorrowExecuteNotFound();
 		//testReturnExecuteOK();
@@ -15,7 +15,7 @@ public class BorrowRerutnLogicTset {
 		//testMedicalEquipmentByMeNo();
 		//testExecuteOK();
 		//testExecuteNG();
-		testEonrollOK();
+		//testEonrollOK();
 		//testEnrollDuplicate();
 		//testFindName();
 		//testFindNG();

@@ -1,7 +1,7 @@
 package model;
 import java.io.Serializable;
 
-public class Place implements Serializable {
+public class Place implements Serializable, Cloneable {
 	private static int place;
 	private static String placeName;
 
@@ -26,5 +26,11 @@ public class Place implements Serializable {
 	}
 	public String toString() {
 	    return placeName;
+	}
+	public Place clone() {
+		Place placeResult = new Place();
+		placeResult.place = this.place;
+		placeResult.placeName = this.placeName;
+		return placeResult;
 	}
 }

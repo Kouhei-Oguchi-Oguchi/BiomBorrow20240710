@@ -45,74 +45,91 @@ public class BorrowServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String datetimeValue = request.getParameter("Borrow-time");
-		String medicalEquimentValue = request.getParameter("medicalEquiment");
-		String departmetValue = request.getParameter("department");
+		String medicalEquipmentValue = request.getParameter("medicalEquiment");
+		String departmentValue = request.getParameter("department");
+		if(datetimeValue == null || datetimeValue.isEmpty() ||
+				medicalEquipmentValue == null || medicalEquipmentValue.isEmpty() ||
+				departmentValue == null || departmentValue.isEmpty()){
+			String errorMessage = "貸出日、4桁番号、部署のいずれかが未入力です";
+			request.setAttribute("errorMessage", errorMessage);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ErrorMessage.jsp");
+			dispatcher.forward(request, response);
+		}
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime BorrowDate = LocalDateTime.parse(datetimeValue, fmt);
 		BorrowDate borrowdays = new BorrowDate();
 		borrowdays.setBorrowdays(BorrowDate);
-		int meNO = Integer.parseInt(medicalEquimentValue);
+		int meNO = Integer.parseInt(medicalEquipmentValue);
 		MedicalEquipment medicalEquipmen = new MedicalEquipment();
 		medicalEquipmen.setMedicalEquipmen(meNO); 
-		int department = Integer.parseInt(departmetValue);
+		int department = Integer.parseInt(departmentValue);
 		Place place = new Place(department);
 		place.setPlace(department);
-		BorrowReturnLogic bo = new BorrowReturnLogic();
-		MedicalEquipmentResult resultBorrow = bo.BorrowExecute(BorrowDate, meNO, department);
-		if(resultBorrow.isSuccess()) {
-			HttpSession session = request.getSession();
-			session.setAttribute("borrowdays", borrowdays);
-			session.setAttribute("medicalEquipmen", medicalEquipmen);
-			int placeNumber = place.getPlace();
-			switch(placeNumber) {
-			case 1:
-				String placeName3EeatWard = "本館3階東";
-				session.setAttribute("placename", placeName3EeatWard);
-				break;
-			case 2:
-				String placeName3WestWard = "本館3階西";
-				session.setAttribute("placename", placeName3WestWard);
-				break;
-			case 3:
-				String placeName2WestWard = "本館2階西";
-				session.setAttribute("placename", placeName2WestWard);
-				break;
-			case 4:
-				String placeName2EeatNursingCareClinic = "介護医療院";
-				session.setAttribute("placename", placeName2EeatNursingCareClinic);
-				break;
-			case 5:
-				String placeName4SouthWard = "南館4階病棟";
-				session.setAttribute("placename", placeName4SouthWard);
-				break;
-			case 6:
-				String placeName3SouthWard = "南館3階病棟";
-				session.setAttribute("placename", placeName3SouthWard);
-				break;
-			case 7:
-				String placeName2SouthWard = "南館2階病棟";
-				session.setAttribute("placename", placeName2SouthWard);
-				break;
-			case 8:
-				String placeName1SouthWard = "南館1階病棟";
-				session.setAttribute("placename", placeName1SouthWard);
-				break;
-			case 9:
-				String placeNameNewSouthWard = "南館1階病棟";
-				session.setAttribute("placename", placeNameNewSouthWard);
-				break;
-			case 10:
-				String placeNameRehabilitation = "リハビリ";
-				session.setAttribute("placename", placeNameRehabilitation);
-				break;
+		try{
+			BorrowReturnLogic bo = new BorrowReturnLogic();
+			MedicalEquipmentResult resultBorrow = bo.BorrowExecute(BorrowDate, meNO, department);
+			if(resultBorrow.isEquipmentsSuccess()) {
+				HttpSession session = request.getSession();
+				session.setAttribute("borrowdays", borrowdays);
+				session.setAttribute("medicalEquipmen", medicalEquipmen);
+				int placeNumber = place.getPlace();
+				switch(placeNumber) {
+				case 1:
+					String placeName3EeatWard = "本館3階東";
+					session.setAttribute("placename", placeName3EeatWard);
+					break;
+				case 2:
+					String placeName3WestWard = "本館3階西";
+					session.setAttribute("placename", placeName3WestWard);
+					break;
+				case 3:
+					String placeName2WestWard = "本館2階西";
+					session.setAttribute("placename", placeName2WestWard);
+					break;
+				case 4:
+					String placeName2EeatNursingCareClinic = "介護医療院";
+					session.setAttribute("placename", placeName2EeatNursingCareClinic);
+					break;
+				case 5:
+					String placeName4SouthWard = "南館4階病棟";
+					session.setAttribute("placename", placeName4SouthWard);
+					break;
+				case 6:
+					String placeName3SouthWard = "南館3階病棟";
+					session.setAttribute("placename", placeName3SouthWard);
+					break;
+				case 7:
+					String placeName2SouthWard = "南館2階病棟";
+					session.setAttribute("placename", placeName2SouthWard);
+					break;
+				case 8:
+					String placeName1SouthWard = "南館1階病棟";
+					session.setAttribute("placename", placeName1SouthWard);
+					break;
+				case 9:
+					String placeNameNewSouthWard = "南館1階病棟";
+					session.setAttribute("placename", placeNameNewSouthWard);
+					break;
+				case 10:
+					String placeNameRehabilitation = "リハビリ";
+					session.setAttribute("placename", placeNameRehabilitation);
+					break;
+				}
+				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/BorrowDone.jsp");
+				dispatcher.forward(request, response);
+			} else {
+				String errorMessage = resultBorrow.getErrorMessage();
+				request.setAttribute("errorMessage",errorMessage);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ErrorMessage.jsp");
+				dispatcher.forward(request, response);
+				return;
 			}
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/BorrowDone.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			String errorMessage = resultBorrow.getErrorMessage();
-			request.setAttribute("errorMessage",errorMessage);
+		}catch (Exception e){
+			e.printStackTrace();
+			String errorMessage = "システムエラー";
+			request.setAttribute("errorMessage", errorMessage);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ErrorMessage.jsp");
-			dispatcher.forward(request, response);
+			dispatcher.forward(request, response);	
 		}
 	}
 }
